@@ -265,6 +265,63 @@ def plot_evolution(biome_map, history, filename="step5_evolution.png"):
     plt.savefig(filename, bbox_inches='tight')
     plt.show()
 
+# extra
+def plot_3d_map(biome_map, coral_map, filename="3d_map.png"):
+    """
+
+    """
+    height_grid, width_grid = biome_map.shape
+
+    z_data = np.zeros((height_grid, width_grid))
+    colour_data = np.empty((height_grid, width_grid), dtype=object)
+    colours = [
+        '#08306b', # deep calm
+        '#2879b9', # deep flow
+        '#d2b48c', # sheltered rock
+        '#ff7f50', # exposed reef
+        '#ff00ff', # staghorn
+        '#00ff00', # brain
+    ]
+
+    for y in range(height_grid):
+        for x in range(width_grid):
+            if coral_map[y, x] == 1:
+                z_data[y, x] = 2.0
+                colour_data[y, x] = colours[4]
+            elif coral_map[y, x] == 2:
+                z_data[y, x] = 2.0
+                colour_data[y, x] = colours[5]
+            else:
+                biome = biome_map[y, x]
+                if biome == 0:  # deep calm
+                    z_data[y, x] = 0.0
+                    colour_data[y, x] = colours[0]
+                elif biome == 1:  # deep flow
+                    z_data[y, x] = 0.0
+                    colour_data[y, x] = colours[1]
+                elif biome == 2:  # sheltered rock
+                    z_data[y, x] = 1.0
+                    colour_data[y, x] = colours[2]
+                elif biome == 3:  # exposed reef
+                    z_data[y, x] = 1.0
+                    colour_data[y, x] = colours[3]
+
+    fig = plt.figure(figsize=(8, 8))
+    ax = fig.add_subplot(111, projection='3d')
+
+    X, Y = np.meshgrid(np.arange(width_grid), np.arange(height_grid))
+
+    ax.plot_surface(X, Y, z_data, facecolors=colour_data, shade=False, rstride=1, cstride=1, linewidth=0, antialiased=False)
+    ax.set_title("3d Visualization of Coral Reef Ecosystem")
+
+    ax.set_xticks([])
+    ax.set_yticks([])
+    ax.set_zticks([])
+
+    ax.view_init(elev=50, azim=-45)
+
+    plt.savefig(filename, bbox_inches='tight')
+    plt.show()
 
 if __name__ == "__main__":
 
@@ -279,6 +336,8 @@ if __name__ == "__main__":
 
     my_corals = generate_coral_placement(my_biomes, seed=42)
     plot_ecosystem(my_biomes, my_corals)
+
+    plot_3d_map(my_biomes, my_corals)
 
     # Simulation
     gen_0 = generate_coral_placement(my_biomes, seed=42)
