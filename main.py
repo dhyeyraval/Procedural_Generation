@@ -5,14 +5,14 @@ from matplotlib.colors import ListedColormap
 
 # Step 1: Base Terrain
 
-def generate_base_terrain(width=32, height=32, scale=10.0, seed=42):
+def generate_base_terrain(width=32, height=32, scale=10.0, seed=42, octaves=1):
     """
     generates a 2d terrain map using perlin noise to represent to water depths.
     returns a 2d array with 0(deep water) and 1(shallow water) values 
     """
     terrain_map = np.zeros((height, width))
 
-    noise_gen = PerlinNoise(octaves=1, seed=seed)
+    noise_gen = PerlinNoise(octaves=octaves, seed=seed)
 
     for y in range(height):
         for x in range(width):
@@ -41,14 +41,14 @@ def plot_and_save_map(terrain_map, filename="step1_terrain.png"):
 # Step 2: Water Current Map
 
 # generates a new perlin noise map to represent 2 water current strengths
-def generate_current_map(width=32, height=32, scale=20.0, seed=1337):
+def generate_current_map(width=32, height=32, scale=20.0, seed=1337, octaves=1):
     """
     generates a new perlin noise map to represent water current strengths.
     returns a 2d array with 0(calm water) and 1(strong water) values
     """
     current_map = np.zeros((height, width))
 
-    noise_gen = PerlinNoise(octaves=1, seed=seed)
+    noise_gen = PerlinNoise(octaves=octaves, seed=seed)
 
     for y in range(height):
         for x in range(width):
@@ -337,8 +337,6 @@ if __name__ == "__main__":
     my_corals = generate_coral_placement(my_biomes, seed=42)
     plot_ecosystem(my_biomes, my_corals)
 
-    plot_3d_map(my_biomes, my_corals)
-
     # Simulation
     gen_0 = generate_coral_placement(my_biomes, seed=42)
     rng = np.random.default_rng(seed=999)
@@ -352,3 +350,5 @@ if __name__ == "__main__":
         history.append(current_state.copy())
 
     plot_evolution(my_biomes, history)
+
+    plot_3d_map(my_biomes, my_corals)
