@@ -18,10 +18,11 @@ The system generates the environment and simulates evolution through the followi
 
 ### Requirements
 
-The script is written in Python and relies on standard data science and noise libraries:
+Before executing the script, you will need to install python.
+Install the required dependencies using:
 
 ```bash
-pip install numpy matplotlib perlin-noise
+pip install -r requirements.txt
 ```
 
 ### Running the Script
