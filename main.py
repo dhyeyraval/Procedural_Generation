@@ -234,7 +234,7 @@ def plot_evolution(biome_map, history, filename="step5_evolution.png"):
 
 # Step 6
 
-def plot_3d_map(biome_map, coral_map, filename="3d_map.png"):
+def plot_3d_map(biome_map, coral_map, filename="step6_3d_map.png"):
     height_grid, width_grid = biome_map.shape
 
     z_data = np.zeros((height_grid, width_grid))

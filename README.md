@@ -57,10 +57,32 @@ The system is highly modular. The following parameters control the generation an
 The script executes the full generation pipeline sequentially, producing six distinct visual outputs. This allows you to inspect the mathematical logic and AI rules at every stage of the ecosystem's creation:
 
 1. **Step 1: Base Terrain (Depth) - `step1_terrain.png`** Visualizes the primary Perlin noise layer, establishing the physical seabed (Deep Water vs. Shallow Rock).
+<p align="center">
+  <img src="step1_terrain.png" width="250"/>
+</p>
+
 2. **Step 2: Water Current (Flow) - `step2_current.png`** Visualizes the secondary, larger-scale noise layer simulating water flow independently of the seabed.
+<p align="center">
+  <img src="step2_current.png" width="250"/>
+</p>
+
+
 3. **Step 3: Biome Matrix - `step3_biomes.png`** The mathematical intersection of the Depth and Flow maps, creating four distinct ecological zones.
+<p align="center">
+  <img src="step3_biomes.png" width="250"/>
+</p>
+
+
 4. **Step 4: AI Coral Placement - `step4_ecosystem.png`** Shows "Generation 0," where coral polyps are deterministically seeded into their required biomes and form initial clusters.
+<p align="center">
+  <img src="step4_ecosystem.png" width="250"/>
+</p>
+
+
 5. **Step 5: Ecosystem Evolution - `step5_evolution.png`** A side-by-side timeline (Gen 0 to Gen 10) demonstrating the Cellular Automata simulation. Corals organically grow into valid adjacent space or decay from overcrowding.
+![Demo Image](step5_evolution.png)
+
+
 
 ### Color Legend (For Steps 3 through 6):
 * **Dark Blue:** Deep Calm Water
@@ -79,6 +101,8 @@ Using `matplotlib`, the initial generation (Gen 0) of the simulated ecosystem is
 * **The X and Y axes** represent the spatial coordinate grid.
 * **The Z axis** applies vertical height rules based on the simulation data (Deep Water = `Z:0`, Rock/Reef = `Z:1`, Coral Clusters = `Z:2`).
 
-**How to view:** When running the script, the outputs will display sequentially. The interactive 3D diorama will automatically render and open as soon as you close the Step 5 timeline window.
+<p align="center">
+  <img src="step6_3d_map.png" width="250"/>
+</p>
 
 ---
